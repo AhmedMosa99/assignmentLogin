@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1980874043",
+    "project_id": "geegs-16044",
+    "storage_bucket": "geegs-16044.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1980874043:android:c428aa5a6d6dadb727cb1e",
+        "android_client_info": {
+          "package_name": "com.example.gsg2_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1980874043-khfd1s6uipv5n7ref9ecm0jkj0o06ko6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnVd60yLSU7oCw11hcOteEDK_Nl_LNLZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1980874043-khfd1s6uipv5n7ref9ecm0jkj0o06ko6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
