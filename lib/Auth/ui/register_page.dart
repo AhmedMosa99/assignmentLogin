@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gsg2_firebase/Auth/helpers/auth_helper.dart';
+import 'package:gsg2_firebase/Auth/models/country.dart';
 import 'package:gsg2_firebase/Auth/providers/auth_provider.dart';
 import 'package:gsg2_firebase/Auth/ui/widgets/custom_textField.dart';
 import 'package:gsg2_firebase/global_widgets/custom_button.dart';
@@ -22,6 +23,40 @@ class RegisterPage extends StatelessWidget {
               CustomTextfield('Email', provider.emailController),
               CustomTextfield('Password', provider.passwordController),
               CustomButton(provider.register, 'Register'),
+              Container(
+                child: DropdownButton<Country>(
+                  value: provider.selectedCountry,
+                  onChanged: (x){
+                    provider.selectedCountry(x);
+                  },
+                  items: [
+                    provider.countries.map((e) {
+                      return DropdownMenuItem<Country>(
+                       child: Text(e.name),
+                       value: e,
+                       
+                      );
+                    }).toList();
+                  ],
+                ),
+              ),
+               Container(
+                child: DropdownButton<Country>(
+                  value: provider.selectedCountry,
+                  onChanged: (x){
+                    provider.selectedCountry(x);
+                  },
+                  items: [
+                    provider.countries.map((e) {
+                      return DropdownMenuItem<Country>(
+                       child: Text(e.name),
+                       value: e,
+                       
+                      );
+                    }).toList();
+                  ],
+                ),
+              ),
             ],
           ),
         );

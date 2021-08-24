@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gsg2_firebase/Auth/helpers/auth_helper.dart';
 import 'package:gsg2_firebase/Auth/helpers/firestore_helper.dart';
+import 'package:gsg2_firebase/Auth/models/country.dart';
 import 'package:gsg2_firebase/Auth/models/register_request.dart';
 import 'package:gsg2_firebase/Auth/ui/login_page.dart';
 import 'package:gsg2_firebase/chats/home_page.dart';
@@ -21,6 +22,19 @@ class AuthProvider extends ChangeNotifier {
   resetControllers() {
     emailController.clear();
     passwordController.clear();
+  }
+
+  List<Country> countries;
+  Country selectedCountry;
+  selectCountry(Country country) {
+    this.selectedCountry = country;
+    notifyListeners();
+  }
+
+  getCountries() {
+    List<Country> countries = FirestoreHelper.firestoreHelper.getAllCountries();
+    this.countries = countries;
+    notifyListeners();
   }
 
   register() async {
@@ -61,8 +75,8 @@ class AuthProvider extends ChangeNotifier {
     //       sendVericiafion);
     // }
     resetControllers();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString('email', emailController.text);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', emailController.text);
   }
 
   sendVericiafion() {
