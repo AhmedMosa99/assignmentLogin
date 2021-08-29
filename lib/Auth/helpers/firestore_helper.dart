@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gsg2_firebase/Auth/models/country.dart';
+import 'package:gsg2_firebase/Auth/models/country_model.dart';
 import 'package:gsg2_firebase/Auth/models/register_request.dart';
 import 'package:gsg2_firebase/Auth/models/user_model.dart';
 import 'package:gsg2_firebase/Auth/ui/register_page.dart';
@@ -20,11 +20,11 @@ class FirestoreHelper {
     }
   }
 
-  getUserFromFirestore(String userId) async {
+  Future<UserModel> getUserFromFirestore(String userId) async {
     DocumentSnapshot documentSnapshot =
         await firebaseFirestore.collection('Users').doc(userId).get();
 
-    print(documentSnapshot.data());
+    return UserModel.fromMap(documentSnapshot.data());
   }
 
   Future<List<UserModel>> getAllUsersFromFirestore() async {
@@ -33,18 +33,29 @@ class FirestoreHelper {
     List<QueryDocumentSnapshot<Map<String, dynamic>>> docs = querySnapshot.docs;
     List<UserModel> users =
         docs.map((e) => UserModel.fromMap(e.data())).toList();
-    print(users.length);
+
     return users;
   }
 
-  Future<List<Country>> getAllCountries() async {
-    QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        await firebaseFirestore.collection('countries').get();
-    List<Country> countries = querySnapshot.docs.map((e) {
-      Map map = e.data();
-      map['id'] = e.id;
-      return Country.fromJson(map);
-    }).toList();
-    return countries;
+  Future<List<CountryModel>> getAllCountries() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await firebaseFirestore.collection('countries').get();
+      List<CountryModel> countries = querySnapshot.docs.map((e) {
+        Map map = e.data();
+        map['id'] = e.id;
+        return CountryModel.fromJson(map);
+      }).toList();
+      return countries;
+    } on Exception catch (e) {
+      // TODO
+    }
+  }
+
+  updateProfile(UserModel userModel) async {
+    await firebaseFirestore
+        .collection('Users')
+        .doc(userModel.id)
+        .update(userModel.toMap());
   }
 }

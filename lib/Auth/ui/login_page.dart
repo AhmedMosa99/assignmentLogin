@@ -22,7 +22,6 @@ class LoginPage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 RouteHelper.routeHelper.goToPage(ResetPasswordPage.routeName);
-                
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
